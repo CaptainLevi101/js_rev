@@ -35,3 +35,14 @@ This is an array, which contains the functions that we attach to the promise obj
 
 ![alt text](image.png)  
 ![alt text](image-1.png)
+
+**the problem with the call back was we were not able to return the response**
+
+![alt text](image-2.png)
+
+## Consuming a Promise
+
+promise consumption is the main thing, using which we willl avoid the inversion of control, whenever we call a function returning a promise
+we will get a promise object which is like any js object that we can store in a variable
+![alt text](image-3.png)
+![alt text](image-4.png)
