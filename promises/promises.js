@@ -118,6 +118,14 @@ function uploadFile(url, fileName) {
 // we can use .then() function on the promise object tp bind the functions w ewant to execcute once we fullfill a promise
 // the .then function takes fucntion as an argument that we want to execute after promise fulfilssa asdn  argument function takes value property as parameter
 
+//read mdn docs for more info on promises
+//different promises fucntions
+//
+//promise.all() - it takes an array of promises and returns a new promise that resolves when all the promises in the array have resolved, or rejects if any of the promises in the array reject.
+//promise.any() - it takes an array of promises and returns a new promise that resolves as soon as any of the promises in the array resolve, or rejects if all of the promises in the array reject.
+//promise.reject() - it returns a new promise that is rejected with the given reason.
+//promise.resolve() - it returns a new promise that is resolved with the given value.
+
 let dwnldPromise = fetchData("ashish.com");
 dwnldPromise
   .then(function processDwnld(value) {

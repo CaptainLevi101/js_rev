@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button id="jokeBtn">Get a Joke</button>
+    <p id="Jokes"></p>
+  </body>
+  <script>
+    function fetchJoke() {
+      let joke = fetch("https://official-joke-api.appspot.com/random_joke")
+        .then(function processJoke(joke) {
+          return joke.json();
+        })
+        .then(function displayJoke(jokeData) {
+          let x = document.getElementById("Jokes");
+          x.innerHTML = jokeData.setup + " " + jokeData.punchline;
+        });
+    }
+    let x = document.getElementById("jokeBtn");
+    //console.log(x);
+    x.addEventListener("click", fetchJoke);
+  </script>
+</html>

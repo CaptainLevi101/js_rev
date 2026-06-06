@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My To-Do List</title>
+    <link rel="stylesheet" href="FakeStyles.css" />
+  </head>
+  <body>
+    <ul id="og"></ul>
+
+    <div class="controls">
+      <input type="text" id="myInput" placeholder="Type a new item..." />
+      <button id="addItemBtn">Add Item</button>
+      <button id="clearListBtn">Clear List</button>
+    </div>
+
+    <script>
+      function adFn(inputField, arr) {
+        if (inputField.value === "") return;
+        let id = crypto.randomUUID();
+        arr = [...arr, { text: inputField.value, id: id }];
+        localStorage.setItem("listItems", JSON.stringify(arr));
+        inputField.value = "";
+
+        setTimeout(function () {
+          location.reload();
+        }, 500);
+      }
+
+      let listContainer = document.getElementById("og");
+      let addBtn = document.getElementById("addItemBtn");
+      let clearBtn = document.getElementById("clearListBtn");
+      const InputField = document.getElementById("myInput");
+
+      let storedData = localStorage.getItem("listItems");
+      let arr = storedData ? JSON.parse(storedData) : [];
+
+      arr.forEach((item) => {
+        let x = document.createElement("li");
+        x.classList.add("listItem");
+        let textSpan = document.createElement("span");
+        textSpan.innerText = item.text;
+        x.appendChild(textSpan);
+
+        let divContainer = document.createElement("div");
+        divContainer.classList.add("divContainer");
+
+        let editBtn = document.createElement("button");
+        editBtn.innerText = "Edit";
+        editBtn.classList.add("editBtn");
+        divContainer.appendChild(editBtn);
+
+        let deleteBtn = document.createElement("button");
+        deleteBtn.innerText = "Delete";
+        deleteBtn.classList.add("deleteBtn");
+        divContainer.appendChild(deleteBtn);
+
+        x.appendChild(divContainer);
+        listContainer.appendChild(x);
+
+        editBtn.addEventListener("click", function () {
+          if (editBtn.innerText === "Edit") {
+            // --- EDIT MODE ---
+            editBtn.innerText = "Save";
+            editBtn.style.backgroundColor = "#28a745"; // Green for save
+
+            let editInput = document.createElement("input");
+            editInput.type = "text";
+            editInput.value = textSpan.innerText;
+
+            // Put INPUT in, take SPAN out
+            x.replaceChild(editInput, textSpan);
+          } else {
+            // --- SAVE MODE ---
+            let editInput = x.querySelector("input");
+            let newText = editInput.value;
+
+            // Don't let them save a blank item
+            if (newText.trim() === "") return;
+
+            editBtn.innerText = "Edit";
+            editBtn.style.backgroundColor = "#007bff"; // Blue for edit
+
+            // 1. Update the hidden span with the new text
+            textSpan.innerText = newText;
+
+            // 2. Put SPAN in, take INPUT out (THE FIX!)
+            x.replaceChild(textSpan, editInput);
+
+            // 3. Update the array
+            arr = arr.map((it) => {
+              if (it.id === item.id) {
+                return { id: it.id, text: newText };
+              }
+              return it;
+            });
+
+            // 4. Save to local storage
+            localStorage.setItem("listItems", JSON.stringify(arr));
+          }
+        });
+        deleteBtn.addEventListener("click", () => {
+          const newArray = arr.filter((it) => it.id != item.id);
+          localStorage.setItem("listItems", JSON.stringify(newArray));
+          location.reload();
+        });
+      });
+
+      addBtn.addEventListener("click", () => {
+        adFn(InputField, arr);
+      });
+
+      clearBtn.addEventListener("click", () => {
+        localStorage.clear();
+        // Added a reload here so the screen actually clears instantly!
+        location.reload();
+      });
+    </script>
+  </body>
+</html>

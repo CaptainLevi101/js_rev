@@ -1,0 +1,113 @@
+/* FakeStyles.css */
+
+/* --- GLOBAL STYLES --- */
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f7f6;
+  color: #333;
+  max-width: 900px;
+  margin: 50px auto;
+  padding: 30px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* --- LIST STYLES --- */
+ul#og {
+  list-style-type: none;
+  padding: 0;
+  margin: 0 0 20px 0;
+}
+
+.listItem {
+  background-color: #ffffff;
+  margin-bottom: 10px;
+  padding: 12px 15px;
+  border-radius: 6px;
+  border: 1px solid #e0e0e0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
+/* --- BUTTON CONTAINER --- */
+.divContainer {
+  display: flex;
+  gap: 8px;
+  flex-wrap: nowrap;
+}
+
+/* --- BUTTON STYLES --- */
+button {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 600;
+  transition:
+    opacity 0.2s ease,
+    transform 0.1s ease;
+}
+
+button:hover {
+  opacity: 0.85;
+}
+
+button:active {
+  transform: scale(0.96);
+}
+
+.editBtn {
+  background-color: #007bff;
+  color: white;
+  flex-shrink: 1;
+  min-width: 0;
+}
+
+.deleteBtn {
+  background-color: #dc3545;
+  color: white;
+  flex-shrink: 1;
+  min-width: 0;
+}
+
+/* Bottom Controls (Add & Clear) */
+.controls {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 2px dashed #eee;
+}
+
+/* ---> NEW: Input Field Styling <--- */
+#myInput {
+  flex: 2; /* Takes up twice as much space as the buttons */
+  padding: 12px 15px;
+  font-size: 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: 5px;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+#myInput:focus {
+  border-color: #007bff; /* Highlights blue when clicked */
+}
+
+#addItemBtn {
+  background-color: #28a745;
+  color: white;
+  flex: 1;
+  padding: 12px;
+  font-size: 16px;
+}
+
+#clearListBtn {
+  background-color: #6c757d;
+  color: white;
+  padding: 12px;
+  font-size: 16px;
+}
